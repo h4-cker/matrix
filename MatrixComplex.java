@@ -151,10 +151,11 @@ public class MatrixComplex implements MatrixTemplate<MatrixComplex, ComplexNums>
     @Override
     public MatrixComplex transpose() {
         MatrixComplex newMatrix = new MatrixComplex(this.col, this.row, new ArrayList<>(this.row * this.col));
-        int j = this.matrix.size() - 1;
-        for (int i = 0; i < this.matrix.size(); i++) {
-            newMatrix.matrix.add(i, this.matrix.get(j));
-            j--;
+        for (int i = 0; i < this.row; i++) {
+            for (int j = 0; j < this.col; j++) {
+                newMatrix.matrix.add(i * row + j, this.matrix.get(j * row + i));
+            }
+
         }
         return newMatrix;
     }
