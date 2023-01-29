@@ -51,7 +51,7 @@ public class ComplexNums {
     }
 
     /**
-     * Add the value of the given complex number (result = this + second)
+     * Adds the value of the given complex number (result = this + second)
      * @param second Awaits to receive a complex number
      * @return New complex number
      */
@@ -63,7 +63,7 @@ public class ComplexNums {
     }
 
     /**
-     * Subtract the value of the given complex number (result = this - second)
+     * Subtracts the value of the given complex number (result = this - second)
      * @param second Awaits to receive a complex number
      * @return New complex number
      */
@@ -75,7 +75,7 @@ public class ComplexNums {
     }
 
     /**
-     * Multiply the value of the given complex number (result = this * second)
+     * Multiples the value of the given complex number (result = this * second)
      * @param second Awaits to receive a complex number
      * @return New complex number
      */
@@ -87,7 +87,7 @@ public class ComplexNums {
     }
 
     /**
-     * Divide the value of the given complex number (result = this / second)
+     * Divides the value of the given complex number (result = this / second)
      * @param second Awaits to receive a complex number
      * @return New complex number
      */

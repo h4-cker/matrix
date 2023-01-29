@@ -11,6 +11,5 @@ public interface MatrixTemplate<T1, T2> {
     T1 multiplyMatrix(T1 secondMatrix);
     T1 multiplyConstant(T2 constant);
     T1 transpose();
-    T2 determinant(ArrayList<T2> matrix, int degree);
     void printMatrix();
 }

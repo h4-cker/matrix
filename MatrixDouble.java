@@ -56,7 +56,13 @@ public class MatrixDouble implements MatrixTemplate<MatrixDouble, Double> {
     @Override
     public MatrixDouble addConstant2Element(Double constant, int index){
         MatrixDouble newMatrix = new MatrixDouble(this.row, this.col, new ArrayList<>(this.row * this.col));
-        newMatrix.matrix.set(index, this.matrix.get(index) + constant);
+        for (int i = 0; i < newMatrix.matrix.size(); i++) {
+            if (i == index) {
+                newMatrix.matrix.set(index, this.matrix.get(index) + constant);
+            } else {
+                newMatrix.matrix.set(i, this.matrix.get(i));
+            }
+        }
         return newMatrix;
     }
 
@@ -99,8 +105,7 @@ public class MatrixDouble implements MatrixTemplate<MatrixDouble, Double> {
         return newMatrix;
     }
 
-    @Override
-    public Double determinant(ArrayList<Double> matrix, int degree) {
+    private Double determinant(ArrayList<Double> matrix, int degree) {
         double determinant = 0;
         if (degree == 1) {
             return matrix.get(0);

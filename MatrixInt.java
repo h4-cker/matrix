@@ -56,7 +56,13 @@ public class MatrixInt implements MatrixTemplate<MatrixInt, Integer> {
     @Override
     public MatrixInt addConstant2Element(Integer constant, int index){
         MatrixInt newMatrix = new MatrixInt(this.row, this.col, new ArrayList<>(this.row * this.col));
-        newMatrix.matrix.set(index, this.matrix.get(index) + constant);
+        for (int i = 0; i < newMatrix.matrix.size(); i++) {
+            if (i == index) {
+                newMatrix.matrix.set(index, this.matrix.get(index) + constant);
+            } else {
+                newMatrix.matrix.set(i, this.matrix.get(i));
+            }
+        }
         return newMatrix;
     }
 
@@ -99,8 +105,7 @@ public class MatrixInt implements MatrixTemplate<MatrixInt, Integer> {
         return newMatrix;
     }
 
-    @Override
-    public Integer determinant(ArrayList<Integer> matrix, int degree) {
+    private Integer determinant(ArrayList<Integer> matrix, int degree) {
         int determinant = 0;
         if (degree == 1) {
             return matrix.get(0);

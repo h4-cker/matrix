@@ -1,26 +1,47 @@
 import java.util.ArrayList;
 
+/**
+ * Helps to work with <a href="ComplexNums.java">ComplexNums</a> matrices and operations with them
+ * @author Dmitry Antonov
+ * @version 1.0
+ */
 public class MatrixComplex implements MatrixTemplate<MatrixComplex, ComplexNums>{
 
     private final int row, col;
     private final ArrayList<ComplexNums> matrix;
 
+    /**
+     * Default constructor
+     * @param row Awaits to receive the number of rows
+     * @param col Awaits to receive the number of columns
+     * @param matrix Awaits to receive the matrix consists of complex numbers
+     */
     MatrixComplex(int row, int col, ArrayList<ComplexNums> matrix) {
         this.row = row;
         this.col = col;
         this.matrix = matrix;
     }
 
+    /**
+     * @return Number of rows
+     */
     @Override
     public int getRow() {
         return row;
     }
 
+    /**
+     * @return Number of columns
+     */
     @Override
     public int getCol() {
         return col;
     }
 
+    /**
+     * @return Determinant if possible
+     * @exception ArithmeticException if the number of rows is not equal to the number of columns
+     */
     @Override
     public ComplexNums getDet() {
         if (row == col) {
@@ -30,11 +51,19 @@ public class MatrixComplex implements MatrixTemplate<MatrixComplex, ComplexNums>
         }
     }
 
+    /**
+     * @return Matrix of complex numbers
+     */
     @Override
     public ArrayList<ComplexNums> getMatrix() {
         return matrix;
     }
 
+    /**
+     * Adds the second matrix to the first
+     * @param secondMatrix Awaits to receive a matrix
+     * @return New matrix
+     */
     @Override
     public MatrixComplex addMatrix(MatrixComplex secondMatrix) {
         MatrixComplex newMatrix = new MatrixComplex(this.row, this.col, new ArrayList<>(this.row * this.col));
@@ -44,6 +73,11 @@ public class MatrixComplex implements MatrixTemplate<MatrixComplex, ComplexNums>
         return newMatrix;
     }
 
+    /**
+     * Adds the constant number to the whole matrix
+     * @param constant Awaits to receive a complex number
+     * @return New matrix
+     */
     @Override
     public MatrixComplex addConstant2Matrix(ComplexNums constant) {
         MatrixComplex newMatrix = new MatrixComplex(this.row, this.col, new ArrayList<>(this.row * this.col));
@@ -53,13 +87,30 @@ public class MatrixComplex implements MatrixTemplate<MatrixComplex, ComplexNums>
         return newMatrix;
     }
 
+    /**
+     * Adds a constant to the specified element
+     * @param constant Awaits to receive a complex number
+     * @param index Awaits to receive an index of the element
+     * @return New matrix
+     */
     @Override
     public MatrixComplex addConstant2Element(ComplexNums constant, int index){
         MatrixComplex newMatrix = new MatrixComplex(this.row, this.col, new ArrayList<>(this.row * this.col));
-        newMatrix.matrix.set(index, this.matrix.get(index).add(constant));
+        for (int i = 0; i < newMatrix.matrix.size(); i++) {
+            if (i == index) {
+                newMatrix.matrix.set(index, this.matrix.get(index).add(constant));
+            } else {
+                newMatrix.matrix.set(i, this.matrix.get(i));
+            }
+        }
         return newMatrix;
     }
 
+    /**
+     * Multiplies the second matrix by the first
+     * @param secondMatrix Awaits to receive a matrix
+     * @return New matrix
+     */
     @Override
     public MatrixComplex multiplyMatrix(MatrixComplex secondMatrix) {
         if (this.col == secondMatrix.row) {
@@ -79,6 +130,11 @@ public class MatrixComplex implements MatrixTemplate<MatrixComplex, ComplexNums>
         }
     }
 
+    /**
+     * Multiplies the matrix by the constant
+     * @param constant Awaits to receive a complex number
+     * @return New matrix
+     */
     @Override
     public MatrixComplex multiplyConstant(ComplexNums constant) {
         MatrixComplex newMatrix = new MatrixComplex(this.row, this.col, new ArrayList<>(this.row * this.col));
@@ -88,6 +144,10 @@ public class MatrixComplex implements MatrixTemplate<MatrixComplex, ComplexNums>
         return newMatrix;
     }
 
+    /**
+     * Transposes the matrix
+     * @return New matrix
+     */
     @Override
     public MatrixComplex transpose() {
         MatrixComplex newMatrix = new MatrixComplex(this.col, this.row, new ArrayList<>(this.row * this.col));
@@ -99,8 +159,13 @@ public class MatrixComplex implements MatrixTemplate<MatrixComplex, ComplexNums>
         return newMatrix;
     }
 
-    @Override
-    public ComplexNums determinant(ArrayList<ComplexNums> matrix, int degree) {
+    /**
+     * Calculates the determinant of matrix
+     * @param matrix Awaits to receive a matrix
+     * @param degree Awaits to receive a matrix degree
+     * @return New matrix
+     */
+    private ComplexNums determinant(ArrayList<ComplexNums> matrix, int degree) {
         ComplexNums determinant = null;
         if (degree == 1) {
             return matrix.get(0);
@@ -115,6 +180,11 @@ public class MatrixComplex implements MatrixTemplate<MatrixComplex, ComplexNums>
         return determinant;
     }
 
+    /**
+     * Helps the determinant method
+     * @return New matrix of a lower degree
+     * @see MatrixComplex#determinant(ArrayList, int)
+     */
     private ArrayList<ComplexNums> makeMatrix(ArrayList<ComplexNums> matrix, int col, int degree){
         ArrayList<ComplexNums> lowerDegreeMatrix = new ArrayList<>((degree - 1) * (degree - 1));
         int k = 0;
@@ -129,6 +199,9 @@ public class MatrixComplex implements MatrixTemplate<MatrixComplex, ComplexNums>
         return lowerDegreeMatrix;
     }
 
+    /**
+     * Prints the matrix
+     */
     @Override
     public void printMatrix() {
         System.out.println("{");
