@@ -67,8 +67,8 @@ public class MatrixDouble implements MatrixTemplate<MatrixDouble, Double> {
     @Override
     public MatrixDouble addMatrix(MatrixDouble secondMatrix) {
         MatrixDouble newMatrix = new MatrixDouble(this.row, this.col, new ArrayList<>(this.row * this.col));
-        for (int i = 0; i < this.row * this.col; i++) {
-            newMatrix.matrix.set(i, this.matrix.get(i) + secondMatrix.matrix.get(i));
+        for (int i = 0; i < this.matrix.size(); i++) {
+            newMatrix.matrix.add(i, this.matrix.get(i) + secondMatrix.matrix.get(i));
         }
         return newMatrix;
     }
@@ -81,8 +81,8 @@ public class MatrixDouble implements MatrixTemplate<MatrixDouble, Double> {
     @Override
     public MatrixDouble addConstant2Matrix(Double constant) {
         MatrixDouble newMatrix = new MatrixDouble(this.row, this.col, new ArrayList<>(this.row * this.col));
-        for (int i = 0; i < newMatrix.matrix.size(); i++) {
-            newMatrix.matrix.set(i, this.matrix.get(i) + constant);
+        for (int i = 0; i < this.matrix.size(); i++) {
+            newMatrix.matrix.add(i, this.matrix.get(i) + constant);
         }
         return newMatrix;
     }
@@ -96,11 +96,11 @@ public class MatrixDouble implements MatrixTemplate<MatrixDouble, Double> {
     @Override
     public MatrixDouble addConstant2Element(Double constant, int index){
         MatrixDouble newMatrix = new MatrixDouble(this.row, this.col, new ArrayList<>(this.row * this.col));
-        for (int i = 0; i < newMatrix.matrix.size(); i++) {
+        for (int i = 0; i < this.matrix.size(); i++) {
             if (i == index) {
-                newMatrix.matrix.set(index, this.matrix.get(index) + constant);
+                newMatrix.matrix.add(index, this.matrix.get(index) + constant);
             } else {
-                newMatrix.matrix.set(i, this.matrix.get(i));
+                newMatrix.matrix.add(i, this.matrix.get(i));
             }
         }
         return newMatrix;
@@ -121,7 +121,7 @@ public class MatrixDouble implements MatrixTemplate<MatrixDouble, Double> {
                     for (int k = 0; k < this.col; ++k) {
                         s += this.matrix.get(i * this.col + k) * secondMatrix.matrix.get(k * secondMatrix.col + j);
                     }
-                    newMatrix.matrix.set(i * secondMatrix.col + j, s);
+                    newMatrix.matrix.add(i * secondMatrix.col + j, s);
                 }
             }
             return newMatrix;
@@ -138,8 +138,8 @@ public class MatrixDouble implements MatrixTemplate<MatrixDouble, Double> {
     @Override
     public MatrixDouble multiplyConstant(Double constant) {
         MatrixDouble newMatrix = new MatrixDouble(this.row, this.col, new ArrayList<>(this.row * this.col));
-        for (int i = 0; i < this.row * this.col; i++) {
-            newMatrix.matrix.set(i, this.matrix.get(i) * constant);
+        for (int i = 0; i < this.matrix.size(); i++) {
+            newMatrix.matrix.add(i, this.matrix.get(i) * constant);
         }
         return newMatrix;
     }
@@ -151,10 +151,10 @@ public class MatrixDouble implements MatrixTemplate<MatrixDouble, Double> {
     @Override
     public MatrixDouble transpose() {
         MatrixDouble newMatrix = new MatrixDouble(this.col, this.row, new ArrayList<>(this.row * this.col));
-        int j = newMatrix.matrix.size() - 1;
-        for (int i = 0; i < newMatrix.matrix.size(); i++) {
-            newMatrix.matrix.set(i, this.matrix.get(j));
-            j++;
+        int j = this.matrix.size() - 1;
+        for (int i = 0; i < this.matrix.size(); i++) {
+            newMatrix.matrix.add(i, this.matrix.get(j));
+            j--;
         }
         return newMatrix;
     }
@@ -206,7 +206,7 @@ public class MatrixDouble implements MatrixTemplate<MatrixDouble, Double> {
         System.out.println("{");
         for (int i = 0; i < this.row; i++) {
             for (int j = 0; j < this.col; j++) {
-                System.out.printf("%4s" , matrix.get(this.row * i + j));
+                System.out.printf("%10.3f" , matrix.get(this.row * i + j));
             }
             System.out.println();
         }
