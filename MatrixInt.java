@@ -1,26 +1,47 @@
 import java.util.ArrayList;
 
+/**
+ * Helps to work with <a href="java.lang.Integer">Integer</a> matrices and operations with them
+ * @author Dmitry Antonov
+ * @version 1.0
+ */
 public class MatrixInt implements MatrixTemplate<MatrixInt, Integer> {
 
     private final int row, col;
     private final ArrayList<Integer> matrix;
 
+    /**
+     * Default constructor
+     * @param row Awaits to receive the number of rows
+     * @param col Awaits to receive the number of columns
+     * @param matrix Awaits to receive the matrix consists of Integer numbers
+     */
     MatrixInt(int row, int col, ArrayList<Integer> matrix) {
         this.row = row;
         this.col = col;
         this.matrix = matrix;
     }
 
+    /**
+     * @return Number of rows
+     */
     @Override
     public int getRow() {
         return row;
     }
 
+    /**
+     * @return Number of columns
+     */
     @Override
     public int getCol() {
         return col;
     }
 
+    /**
+     * @return Determinant if possible
+     * @exception ArithmeticException if the number of rows is not equal to the number of columns
+     */
     @Override
     public Integer getDet() {
         if (row == col) {
@@ -30,11 +51,19 @@ public class MatrixInt implements MatrixTemplate<MatrixInt, Integer> {
         }
     }
 
+    /**
+     * @return Matrix of complex numbers
+     */
     @Override
     public ArrayList<Integer> getMatrix() {
         return matrix;
     }
 
+    /**
+     * Adds the second matrix to the first
+     * @param secondMatrix Awaits to receive a matrix
+     * @return New matrix
+     */
     @Override
     public MatrixInt addMatrix(MatrixInt secondMatrix) {
         MatrixInt newMatrix = new MatrixInt(this.row, this.col, new ArrayList<>(this.row * this.col));
@@ -44,6 +73,11 @@ public class MatrixInt implements MatrixTemplate<MatrixInt, Integer> {
         return newMatrix;
     }
 
+    /**
+     * Adds the constant number to the whole matrix
+     * @param constant Awaits to receive an Integer number
+     * @return New matrix
+     */
     @Override
     public MatrixInt addConstant2Matrix(Integer constant) {
         MatrixInt newMatrix = new MatrixInt(this.row, this.col, new ArrayList<>(this.row * this.col));
@@ -53,6 +87,12 @@ public class MatrixInt implements MatrixTemplate<MatrixInt, Integer> {
         return newMatrix;
     }
 
+    /**
+     * Adds a constant to the specified element
+     * @param constant Awaits to receive an Integer number
+     * @param index Awaits to receive an index of the element
+     * @return New matrix
+     */
     @Override
     public MatrixInt addConstant2Element(Integer constant, int index){
         MatrixInt newMatrix = new MatrixInt(this.row, this.col, new ArrayList<>(this.row * this.col));
@@ -66,6 +106,11 @@ public class MatrixInt implements MatrixTemplate<MatrixInt, Integer> {
         return newMatrix;
     }
 
+    /**
+     * Multiplies the second matrix by the first
+     * @param secondMatrix Awaits to receive a matrix
+     * @return New matrix
+     */
     @Override
     public MatrixInt multiplyMatrix(MatrixInt secondMatrix) {
         if (this.col == secondMatrix.row) {
@@ -85,6 +130,11 @@ public class MatrixInt implements MatrixTemplate<MatrixInt, Integer> {
         }
     }
 
+    /**
+     * Multiplies the matrix by the constant
+     * @param constant Awaits to receive an Integer number
+     * @return New matrix
+     */
     @Override
     public MatrixInt multiplyConstant(Integer constant) {
         MatrixInt newMatrix = new MatrixInt(this.row, this.col, new ArrayList<>(this.row * this.col));
@@ -94,6 +144,10 @@ public class MatrixInt implements MatrixTemplate<MatrixInt, Integer> {
         return newMatrix;
     }
 
+    /**
+     * Transposes the matrix
+     * @return New matrix
+     */
     @Override
     public MatrixInt transpose() {
         MatrixInt newMatrix = new MatrixInt(this.col, this.row, new ArrayList<>(this.row * this.col));
@@ -105,6 +159,12 @@ public class MatrixInt implements MatrixTemplate<MatrixInt, Integer> {
         return newMatrix;
     }
 
+    /**
+     * Calculates the determinant of matrix
+     * @param matrix Awaits to receive a matrix
+     * @param degree Awaits to receive a matrix degree
+     * @return New matrix
+     */
     private Integer determinant(ArrayList<Integer> matrix, int degree) {
         int determinant = 0;
         if (degree == 1) {
@@ -119,6 +179,11 @@ public class MatrixInt implements MatrixTemplate<MatrixInt, Integer> {
         return determinant;
     }
 
+    /**
+     * Helps the determinant method
+     * @return New matrix of a lower degree
+     * @see MatrixInt#determinant(ArrayList, int)
+     */
     private ArrayList<Integer> makeMatrix(ArrayList<Integer> matrix, int col, int degree){
         ArrayList<Integer> lowerDegreeMatrix = new ArrayList<>((degree - 1) * (degree - 1));
         int k = 0;
@@ -133,6 +198,9 @@ public class MatrixInt implements MatrixTemplate<MatrixInt, Integer> {
         return lowerDegreeMatrix;
     }
 
+    /**
+     * Prints the matrix
+     */
     @Override
     public void printMatrix() {
         System.out.println("{");
