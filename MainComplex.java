@@ -26,16 +26,16 @@ public class MainComplex {
         m2.printMatrix();
         MatrixComplex m3;
 
-//        m3 = m2.addMatrix(m1);
-//        m3.printMatrix();
-//
-//        ComplexNums cn = new ComplexNums(1.23, 2.34);
-//        m3 = m2.addConstant2Matrix(cn);
-//        m3.printMatrix();
-//
-//        ComplexNums cn1 = new ComplexNums(1000.23, 1000.34);
-//        m3 = m2.addConstant2Element(cn1, 3);
-//        m3.printMatrix();
+        m3 = m2.addMatrix(m1);
+        m3.printMatrix();
+
+        ComplexNums cn = new ComplexNums(1.23, 2.34);
+        m3 = m2.addConstant2Matrix(cn);
+        m3.printMatrix();
+
+        ComplexNums cn1 = new ComplexNums(1000.23, 1000.34);
+        m3 = m2.addConstant2Element(cn1, 3);
+        m3.printMatrix();
 
         ComplexNums cn2 = new ComplexNums(100.1, 100.1);
         m3 = m2.multiplyConstant(cn2);

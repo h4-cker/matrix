@@ -11,6 +11,7 @@ public class ComplexNums {
 
     /**
      * Default constructor
+     * rParameter and fiParameter of complex number are counted in RADIANS
      * @param real Awaits to receive a real part of number
      * @param imaginary Awaits to receive an imaginary part of number
      */
@@ -107,7 +108,7 @@ public class ComplexNums {
 
     /**
      * @param degree Awaits to receive a root degree
-     * @return ArrayList<ComplexNums> of complex roots
+     * @return ArrayList of complex roots
      */
     public ArrayList<ComplexNums> complexSqrt(int degree) {
         ArrayList<ComplexNums> roots = new ArrayList<>();
