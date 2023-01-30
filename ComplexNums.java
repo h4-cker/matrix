@@ -19,7 +19,6 @@ public class ComplexNums {
         this.imaginary = imaginary;
         this.rParameter = abs();
         this.fiParameter = Math.atan(imaginary / real);
-        this.printAlgebraic();
     }
 
     /**
@@ -139,20 +138,20 @@ public class ComplexNums {
      * Prints an algebraic form of complex number
      */
     public void printAlgebraic() {
-        System.out.println(this.real + " + " + this.imaginary + " * i");
+        System.out.printf("%10.3f + %.3f*i", this.real, this.imaginary);
     }
 
     /**
      * Prints a trigonometric form of complex number
      */
     public void printTrigonometric() {
-        System.out.println(rParameter + " * (cos(" + fiParameter + ") + i * " + "sin(" + fiParameter + "))");
+        System.out.printf("%10.3f * (cos(%.3f) + i*sin(%.3f))", this.rParameter, this.fiParameter, this.fiParameter);
     }
 
     /**
      * Prints an exponential form of complex number
      */
     public void printExponential() {
-        System.out.println(rParameter + " * e^(" + fiParameter + " * i)");
+        System.out.printf("%10.3f * e^(%.3f*i)", this.rParameter, this.fiParameter);
     }
 }

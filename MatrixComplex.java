@@ -119,9 +119,9 @@ public class MatrixComplex implements MatrixTemplate<MatrixComplex, ComplexNums>
                 for (int j = 0; j < secondMatrix.col; ++j) {
                     ComplexNums s = new ComplexNums(0, 0);
                     for (int k = 0; k < this.col; ++k) {
-                        s.add(this.matrix.get(i * this.col + k).multiply(secondMatrix.matrix.get(k * secondMatrix.col + j)));
+                        s = s.add(this.matrix.get(i * this.col + k).multiply(secondMatrix.matrix.get(k * secondMatrix.col + j)));
                     }
-                    newMatrix.matrix.add(i * secondMatrix.col + j, s);
+                    newMatrix.matrix.add(i, s);
                 }
             }
             return newMatrix;
@@ -155,7 +155,6 @@ public class MatrixComplex implements MatrixTemplate<MatrixComplex, ComplexNums>
             for (int j = 0; j < this.col; j++) {
                 newMatrix.matrix.add(i * row + j, this.matrix.get(j * row + i));
             }
-
         }
         return newMatrix;
     }
@@ -208,7 +207,7 @@ public class MatrixComplex implements MatrixTemplate<MatrixComplex, ComplexNums>
         System.out.println("{");
         for (int i = 0; i < this.row; i++) {
             for (int j = 0; j < this.col; j++) {
-                System.out.printf("%6s" , matrix.get(this.row * i + j));
+                matrix.get(this.row * i + j).printAlgebraic();
             }
             System.out.println();
         }
