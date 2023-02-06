@@ -1,58 +1,135 @@
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Scanner;
 
 public class MainInt {
     public static void main(String[] args) {
-        ArrayList<Integer> matrix = new ArrayList<>(Arrays.asList
-                (1, 4, 3, 3, 1, 6,
-                13, 3, 4, 1, 2, 2,
-                8, 1, 2, 11, 3, 18,
-                9, 5, 12, 7, 4, 4,
-                9, 8, 7, 6, 5, 7,
-                7, 33, 11, 2, 4, 87)
-        );
+        Scanner scanner = new Scanner(System.in);
+        int i = 1;
+        while (i != 0) {
+            System.out.print("""
+                    \nChoose:
+                    \t0 - end
+                    \t1 - create 2 matrices and add
+                    \t2 - create 2 matrices and multiply
+                    \t3 - create 1 matrix and transpose
+                    \t4 - create 1 matrix and add constant number
+                    \t5 - create 1 matrix and add constant number to the element
+                    \t6 - create 1 matrix and get determinant
+                    ? -\s""");
+            i = scanner.nextInt();
+            switch (i) {
+                case 1 -> {
+                    ArrayList<Integer> mat1 = new ArrayList<>();
+                    ArrayList<Integer> mat2 = new ArrayList<>();
+                    System.out.println("1 matrix: input number of rows and cols: ");
+                    int n = scanner.nextInt(), m = scanner.nextInt();
+                    System.out.println("2 matrix: input number of rows and cols: ");
+                    int n1 = scanner.nextInt(), m1 = scanner.nextInt();
+                    System.out.println("1 matrix: ");
+                    for (int j = 0; j < n; j++) {
+                        for (int k = 0; k < m; k++) {
+                            mat1.add(scanner.nextInt());
+                        }
+                    }
+                    System.out.println("2 matrix: ");
+                    for (int j = 0; j < n1; j++) {
+                        for (int k = 0; k < m1; k++) {
+                            mat2.add(scanner.nextInt());
+                        }
+                    }
 
-        ArrayList<Integer> matrix1 = new ArrayList<>(Arrays.asList
-                (1, 4, 3,
-                13, 3, 4,
-                8, 2, 3)
-        );
+                    MatrixInt matrix1 = new MatrixInt(n, m, mat1);
+                    MatrixInt matrix2 = new MatrixInt(n1, m1, mat2);
+                    MatrixInt matrix3 = matrix1.addMatrix(matrix2);
+                    matrix3.printMatrix();
+                }
+                case 2 -> {
+                    ArrayList<Integer> mat1 = new ArrayList<>();
+                    ArrayList<Integer> mat2 = new ArrayList<>();
+                    System.out.println("1 matrix: input number of rows and cols: ");
+                    int n = scanner.nextInt(), m = scanner.nextInt();
+                    System.out.println("2 matrix: input number of rows and cols: ");
+                    int n1 = scanner.nextInt(), m1 = scanner.nextInt();
+                    System.out.println("1 matrix: ");
+                    for (int j = 0; j < n; j++) {
+                        for (int k = 0; k < m; k++) {
+                            mat1.add(scanner.nextInt());
+                        }
+                    }
+                    System.out.println("2 matrix: ");
+                    for (int j = 0; j < n1; j++) {
+                        for (int k = 0; k < m1; k++) {
+                            mat2.add(scanner.nextInt());
+                        }
+                    }
 
-        ArrayList<Integer> matrix2 = new ArrayList<>(Arrays.asList
-                (11, 7, 0,
-                3, 4, 22,
-                6, 5, 2)
-        );
+                    MatrixInt matrix1 = new MatrixInt(n, m, mat1);
+                    MatrixInt matrix2 = new MatrixInt(n1, m1, mat2);
+                    MatrixInt matrix3 = matrix1.multiplyMatrix(matrix2);
+                    matrix3.printMatrix();
+                }
+                case 3 -> {
+                    ArrayList<Integer> mat1 = new ArrayList<>();
+                    System.out.println("1 matrix: input number of rows and cols: ");
+                    int n = scanner.nextInt(), m = scanner.nextInt();
+                    System.out.println("Matrix: ");
+                    for (int j = 0; j < n; j++) {
+                        for (int k = 0; k < m; k++) {
+                            mat1.add(scanner.nextInt());
+                        }
+                    }
 
-        MatrixInt m1 = new MatrixInt(3, 3, matrix1);
-        MatrixInt m2 = new MatrixInt(3, 3, matrix2);
-        MatrixInt m3;
+                    MatrixInt matrix1 = new MatrixInt(n, m, mat1);
+                    MatrixInt matrix2 = matrix1.transpose();
+                    matrix2.printMatrix();
+                }
+                case 4 -> {
+                    ArrayList<Integer> mat1 = new ArrayList<>();
+                    System.out.println("1 matrix: input number of rows and cols: ");
+                    int n = scanner.nextInt(), m = scanner.nextInt();
+                    System.out.println("Matrix: ");
+                    for (int j = 0; j < n; j++) {
+                        for (int k = 0; k < m; k++) {
+                            mat1.add(scanner.nextInt());
+                        }
+                    }
 
-        m3 = m2.addMatrix(m1);
-        m3.printMatrix();
+                    MatrixInt matrix1 = new MatrixInt(n, m, mat1);
+                    System.out.println("Number: ");
+                    MatrixInt matrix2 = matrix1.addConstant2Matrix(scanner.nextInt());
+                    matrix2.printMatrix();
+                }
+                case 5 -> {
+                    ArrayList<Integer> mat1 = new ArrayList<>();
+                    System.out.println("1 matrix: input number of rows and cols: ");
+                    int n = scanner.nextInt(), m = scanner.nextInt();
+                    System.out.println("Matrix: ");
+                    for (int j = 0; j < n; j++) {
+                        for (int k = 0; k < m; k++) {
+                            mat1.add(scanner.nextInt());
+                        }
+                    }
 
-        m3 = m2.addConstant2Matrix(13);
-        m3.printMatrix();
+                    MatrixInt matrix1 = new MatrixInt(n, m, mat1);
+                    System.out.println("Number and index: ");
+                    MatrixInt matrix2 = matrix1.addConstant2Element(scanner.nextInt(), scanner.nextInt());
+                    matrix2.printMatrix();
+                }
+                case 6 -> {
+                    ArrayList<Integer> mat1 = new ArrayList<>();
+                    System.out.println("1 matrix: input number of rows and cols: ");
+                    int n = scanner.nextInt(), m = scanner.nextInt();
+                    System.out.println("Matrix: ");
+                    for (int j = 0; j < n; j++) {
+                        for (int k = 0; k < m; k++) {
+                            mat1.add(scanner.nextInt());
+                        }
+                    }
 
-        m3 = m2.addConstant2Element(1000, 3);
-        m3.printMatrix();
-
-        m3 = m2.multiplyConstant(100);
-        m3.printMatrix();
-
-        m3 = m2.multiplyMatrix(m1);
-        m3.printMatrix();
-
-        m3 = m1.transpose();
-        m3.printMatrix();
-
-        System.out.println(m1.getDet());
-
-        MatrixInt m = new MatrixInt(6, 6, matrix);
-        System.out.println(m.getRow() + " " + m.getCol());
-        System.out.println(m.getMatrix());
-        System.out.println();
-        m.printMatrix();
-        System.out.println(m.getDet());
+                    MatrixInt matrix1 = new MatrixInt(n, m, mat1);
+                    System.out.printf("Determinant = %d\n", matrix1.getDet());
+                }
+            }
+        }
     }
 }

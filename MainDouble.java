@@ -1,59 +1,135 @@
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Scanner;
 
 public class MainDouble {
     public static void main(String[] args) {
-        ArrayList<Double> matrix = new ArrayList<>(Arrays.asList
-                (1.42, 4.22, 3.235, 3.11, 1.01, 6.44,
-                13.21, 3.11, 4.0, 1.111, 2.087, 2.42,
-                8.345, 1.42, 2.645, 11.345, 3.34, 18.66,
-                9.644, 5.666, 12.83, 7.88, 4.123, 4.77,
-                9.643, 8.854, 7.99, 6.08, 5.24, 7.31,
-                7.22, 33.012, 11.423, 2.75, 4.44, 87.18)
-        );
+        Scanner scanner = new Scanner(System.in);
+        int i = 1;
+        while (i != 0) {
+            System.out.print("""
+                    \nChoose:
+                    \t0 - end
+                    \t1 - create 2 matrices and add
+                    \t2 - create 2 matrices and multiply
+                    \t3 - create 1 matrix and transpose
+                    \t4 - create 1 matrix and add constant number
+                    \t5 - create 1 matrix and add constant number to the element
+                    \t6 - create 1 matrix and get determinant
+                    ? -\s""");
+            i = scanner.nextInt();
+            switch (i) {
+                case 1 -> {
+                    ArrayList<Double> mat1 = new ArrayList<>();
+                    ArrayList<Double> mat2 = new ArrayList<>();
+                    System.out.println("1 matrix: input number of rows and cols: ");
+                    int n = scanner.nextInt(), m = scanner.nextInt();
+                    System.out.println("2 matrix: input number of rows and cols: ");
+                    int n1 = scanner.nextInt(), m1 = scanner.nextInt();
+                    System.out.println("1 matrix: ");
+                    for (int j = 0; j < n; j++) {
+                        for (int k = 0; k < m; k++) {
+                            mat1.add(scanner.nextDouble());
+                        }
+                    }
+                    System.out.println("2 matrix: ");
+                    for (int j = 0; j < n1; j++) {
+                        for (int k = 0; k < m1; k++) {
+                            mat2.add(scanner.nextDouble());
+                        }
+                    }
 
-        ArrayList<Double> matrix1 = new ArrayList<>(Arrays.asList
-                (1.1, 4.4, 3.3,
-                13.13, 3.3, 4.4,
-                8.8, 2.2, 3.3)
-        );
+                    MatrixDouble matrix1 = new MatrixDouble(n, m, mat1);
+                    MatrixDouble matrix2 = new MatrixDouble(n1, m1, mat2);
+                    MatrixDouble matrix3 = matrix1.addMatrix(matrix2);
+                    matrix3.printMatrix();
+                }
+                case 2 -> {
+                    ArrayList<Double> mat1 = new ArrayList<>();
+                    ArrayList<Double> mat2 = new ArrayList<>();
+                    System.out.println("1 matrix: input number of rows and cols: ");
+                    int n = scanner.nextInt(), m = scanner.nextInt();
+                    System.out.println("2 matrix: input number of rows and cols: ");
+                    int n1 = scanner.nextInt(), m1 = scanner.nextInt();
+                    System.out.println("1 matrix: ");
+                    for (int j = 0; j < n; j++) {
+                        for (int k = 0; k < m; k++) {
+                            mat1.add(scanner.nextDouble());
+                        }
+                    }
+                    System.out.println("2 matrix: ");
+                    for (int j = 0; j < n1; j++) {
+                        for (int k = 0; k < m1; k++) {
+                            mat2.add(scanner.nextDouble());
+                        }
+                    }
 
-        ArrayList<Double> matrix2 = new ArrayList<>(Arrays.asList
-                (11.11, 7.7, 0.0,
-                3.3, 4.4, 22.22,
-                6.6, 5.5, 2.2)
-        );
+                    MatrixDouble matrix1 = new MatrixDouble(n, m, mat1);
+                    MatrixDouble matrix2 = new MatrixDouble(n1, m1, mat2);
+                    MatrixDouble matrix3 = matrix1.multiplyMatrix(matrix2);
+                    matrix3.printMatrix();
+                }
+                case 3 -> {
+                    ArrayList<Double> mat1 = new ArrayList<>();
+                    System.out.println("1 matrix: input number of rows and cols: ");
+                    int n = scanner.nextInt(), m = scanner.nextInt();
+                    System.out.println("Matrix: ");
+                    for (int j = 0; j < n; j++) {
+                        for (int k = 0; k < m; k++) {
+                            mat1.add(scanner.nextDouble());
+                        }
+                    }
 
-        MatrixDouble m1 = new MatrixDouble(3, 3, matrix1);
-        MatrixDouble m2 = new MatrixDouble(3, 3, matrix2);
-        MatrixDouble m3;
+                    MatrixDouble matrix1 = new MatrixDouble(n, m, mat1);
+                    MatrixDouble matrix2 = matrix1.transpose();
+                    matrix2.printMatrix();
+                }
+                case 4 -> {
+                    ArrayList<Double> mat1 = new ArrayList<>();
+                    System.out.println("1 matrix: input number of rows and cols: ");
+                    int n = scanner.nextInt(), m = scanner.nextInt();
+                    System.out.println("Matrix: ");
+                    for (int j = 0; j < n; j++) {
+                        for (int k = 0; k < m; k++) {
+                            mat1.add(scanner.nextDouble());
+                        }
+                    }
 
-        m3 = m2.addMatrix(m1);
-        m3.printMatrix();
+                    MatrixDouble matrix1 = new MatrixDouble(n, m, mat1);
+                    System.out.println("Number: ");
+                    MatrixDouble matrix2 = matrix1.addConstant2Matrix(scanner.nextDouble());
+                    matrix2.printMatrix();
+                }
+                case 5 -> {
+                    ArrayList<Double> mat1 = new ArrayList<>();
+                    System.out.println("1 matrix: input number of rows and cols: ");
+                    int n = scanner.nextInt(), m = scanner.nextInt();
+                    System.out.println("Matrix: ");
+                    for (int j = 0; j < n; j++) {
+                        for (int k = 0; k < m; k++) {
+                            mat1.add(scanner.nextDouble());
+                        }
+                    }
 
-        m3 = m2.addConstant2Matrix(13.1);
-        m3.printMatrix();
+                    MatrixDouble matrix1 = new MatrixDouble(n, m, mat1);
+                    System.out.println("Number and index: ");
+                    MatrixDouble matrix2 = matrix1.addConstant2Element(scanner.nextDouble(), scanner.nextInt());
+                    matrix2.printMatrix();
+                }
+                case 6 -> {
+                    ArrayList<Double> mat1 = new ArrayList<>();
+                    System.out.println("1 matrix: input number of rows and cols: ");
+                    int n = scanner.nextInt(), m = scanner.nextInt();
+                    System.out.println("Matrix: ");
+                    for (int j = 0; j < n; j++) {
+                        for (int k = 0; k < m; k++) {
+                            mat1.add(scanner.nextDouble());
+                        }
+                    }
 
-        m3 = m2.addConstant2Element(1000.1, 3);
-        m3.printMatrix();
-
-        m3 = m2.multiplyConstant(100.1);
-        m3.printMatrix();
-
-        m3 = m2.multiplyMatrix(m1);
-        m3.printMatrix();
-
-        m3 = m1.transpose();
-        m3.printMatrix();
-
-        System.out.println(m1.getDet());
-        System.out.println();
-
-        MatrixDouble m = new MatrixDouble(6, 6, matrix);
-        System.out.println(m.getRow() + " " + m.getCol());
-        System.out.println(m.getMatrix());
-        System.out.println();
-        m.printMatrix();
-        System.out.println(m.getDet());
+                    MatrixDouble matrix1 = new MatrixDouble(n, m, mat1);
+                    System.out.printf("Determinant = %f\n", matrix1.getDet());
+                }
+            }
+        }
     }
 }

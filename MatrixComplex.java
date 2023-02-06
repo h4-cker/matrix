@@ -126,7 +126,7 @@ public class MatrixComplex implements MatrixTemplate<MatrixComplex, ComplexNums>
             }
             return newMatrix;
         } else {
-            throw new ArithmeticException("Can't multiply matrices");
+            throw new ArithmeticException("Can't multiply matrices of the given size");
         }
     }
 

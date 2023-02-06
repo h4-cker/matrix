@@ -139,14 +139,22 @@ public class ComplexNums {
      * Prints an algebraic form of complex number
      */
     public void printAlgebraic() {
-        System.out.printf("%10.3f + %.3f*i", this.real, this.imaginary);
+        if (this.imaginary > -1) {
+            System.out.printf("%10.3f + %.3f*i", this.real, this.imaginary);
+        } else {
+            System.out.printf("%10.3f - %.3f*i", this.real, Math.abs(this.imaginary));
+        }
     }
 
     /**
      * Prints a trigonometric form of complex number
      */
     public void printTrigonometric() {
-        System.out.printf("%10.3f * (cos(%.3f) + i*sin(%.3f))", this.rParameter, this.fiParameter, this.fiParameter);
+        if (this.fiParameter > -1) {
+            System.out.printf("%10.3f * (cos(%.3f) + i*sin(%.3f))", this.rParameter, this.fiParameter, this.fiParameter);
+        } else {
+            System.out.printf("%10.3f * (cos(%.3f) - i*sin(%.3f))", this.rParameter, this.fiParameter, Math.abs(this.fiParameter));
+        }
     }
 
     /**
