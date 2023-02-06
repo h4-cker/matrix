@@ -19,6 +19,11 @@ public class MatrixComplex implements MatrixTemplate<MatrixComplex, ComplexNums>
     MatrixComplex(int row, int col, ArrayList<ComplexNums> matrix) {
         this.row = row;
         this.col = col;
+        if (matrix.size() != row * col) {
+            for (int i = 0; i < matrix.size() - row * col - 1; i++) {
+                matrix.add(new ComplexNums(0.0, 0.0));
+            }
+        }
         this.matrix = matrix;
     }
 

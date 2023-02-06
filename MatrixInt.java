@@ -19,6 +19,11 @@ public class MatrixInt implements MatrixTemplate<MatrixInt, Integer> {
     MatrixInt(int row, int col, ArrayList<Integer> matrix) {
         this.row = row;
         this.col = col;
+        if (matrix.size() != row * col) {
+            for (int i = 0; i < matrix.size() - row * col - 1; i++) {
+                matrix.add(0);
+            }
+        }
         this.matrix = matrix;
     }
 

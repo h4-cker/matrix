@@ -19,6 +19,11 @@ public class MatrixDouble implements MatrixTemplate<MatrixDouble, Double> {
     MatrixDouble(int row, int col, ArrayList<Double> matrix) {
         this.row = row;
         this.col = col;
+        if (matrix.size() != row * col) {
+            for (int i = 0; i < matrix.size() - row * col - 1; i++) {
+                matrix.add(0.0);
+            }
+        }
         this.matrix = matrix;
     }
 
